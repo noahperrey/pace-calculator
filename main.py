@@ -18,23 +18,28 @@ def convert_time_input(finish_time: str) -> float:
     return float(hours) * 60 + float(minutes)
 
 
+def convert_distance_output(distance: float) -> float:
+    """Rounds distance to 2 decimals"""
+    return round(distance, 2)
+
+
 def convert_pace_output(pace: float) -> str:
-    """Converts pace as float into a string"""
+    """Converts pace as float into a string like 5.7 -> '5:42 min'"""
     minutes = int(pace)
-    seconds = int(round((pace - minutes)*60))
+    seconds = round((pace - minutes) * 60)
     while seconds >= 60:
         minutes += 1
         seconds -= 60
-    if (seconds) < 10:
-        return f'{minutes}:0{int(seconds)} min'
+    if seconds < 10:
+        return f'{minutes}:0{seconds} min'
     else:
-        return f'{minutes}:{int(seconds)} min'
+        return f'{minutes}:{seconds} min'
 
 
 def convert_time_output(finish_time: float) -> str:
-    """Converts finish time as float into a string"""
+    """Converts finish time as float into a string like 90.0 -> '1:30 h'"""
     hours = int(finish_time // 60)
-    minutes = int(round(finish_time % 60))
+    minutes = round(finish_time % 60)
     while minutes >= 60:
         hours += 1
         minutes -= 60
@@ -62,6 +67,4 @@ def calculate_distance(pace: str, finish_time: str) -> float:
     """Calculates distance based on pace and finish time input"""
     calculatable_pace = convert_pace_input(pace)
     calculatable_finish_time = convert_time_input(finish_time)
-    return round((calculatable_finish_time / calculatable_pace), 2)
-
-print(calculate_distance("04:59", "03:30"))
+    return convert_distance_output(calculatable_finish_time / calculatable_pace)
