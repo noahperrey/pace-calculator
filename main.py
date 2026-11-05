@@ -18,9 +18,9 @@ def convert_time_input(finish_time: str) -> float:
     return float(hours) * 60 + float(minutes)
 
 
-def convert_distance_output(distance: float) -> float:
-    """Rounds distance to 2 decimals"""
-    return round(distance, 2)
+def convert_distance_output(distance: float) -> str:
+    """Rounds distance to 2 decimals and converts it into a string like 16.3636 -> '16,36'"""
+    return str(round(distance, 2)).replace(".", ",")
 
 
 def convert_pace_output(pace: float) -> str:
@@ -63,7 +63,7 @@ def calculate_finish_time(pace: str, distance: str) -> str:
     return convert_time_output(calculatable_pace * calculatable_distance)
 
 
-def calculate_distance(pace: str, finish_time: str) -> float:
+def calculate_distance(pace: str, finish_time: str) -> str:
     """Calculates distance based on pace and finish time input"""
     calculatable_pace = convert_pace_input(pace)
     calculatable_finish_time = convert_time_input(finish_time)
