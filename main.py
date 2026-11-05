@@ -3,12 +3,10 @@
 
 def convert_distance_input(distance: str) -> float:
     """Converts distance string in format: 'x,x' into a float"""
-    nr_wth_dot = distance.replace(",", ".")
-    result = float(nr_wth_dot)
-    return result
+    return float(distance.replace(",", "."))
 
 
 def convert_pace_input(pace: str) -> float:
     """Converts pace string into a float of minutes"""
     minutes, seconds = pace.split(":")
-    return float(minutes) + (float(seconds) / 60)
+    return float(minutes) + float(seconds) / 60
