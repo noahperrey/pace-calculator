@@ -31,9 +31,9 @@ def convert_pace_output(pace: float) -> str:
         minutes += 1
         seconds -= 60
     if seconds < 10:
-        return f'{minutes}:0{seconds} min'
+        return f"{minutes}:0{seconds} min"
     else:
-        return f'{minutes}:{seconds} min'
+        return f"{minutes}:{seconds} min"
 
 
 def convert_time_output(finish_time: float) -> str:
@@ -44,57 +44,72 @@ def convert_time_output(finish_time: float) -> str:
         hours += 1
         minutes -= 60
     if minutes < 10:
-        return f'{hours}:0{minutes} h'
+        return f"{hours}:0{minutes} h"
     else:
-        return f'{hours}:{minutes} h'
+        return f"{hours}:{minutes} h"
 
 
 def calculate_pace(distance: str, finish_time: str) -> str:
     """Calculates pace based on distance and finish time input"""
-    calculatable_distance = convert_distance_input(distance)
-    calculatable_finish_time = convert_time_input(finish_time)
-    return convert_pace_output(calculatable_finish_time / calculatable_distance)
+    calculable_distance = convert_distance_input(distance)
+    calculable_finish_time = convert_time_input(finish_time)
+    return convert_pace_output(calculable_finish_time / calculable_distance)
 
 
 def calculate_finish_time(pace: str, distance: str) -> str:
     """Calculates finish time based on pace and distance input"""
-    calculatable_pace = convert_pace_input(pace)
-    calculatable_distance = convert_distance_input(distance)
-    return convert_time_output(calculatable_pace * calculatable_distance)
+    calculable_pace = convert_pace_input(pace)
+    calculable_distance = convert_distance_input(distance)
+    return convert_time_output(calculable_pace * calculable_distance)
 
 
 def calculate_distance(pace: str, finish_time: str) -> str:
     """Calculates distance based on pace and finish time input"""
-    calculatable_pace = convert_pace_input(pace)
-    calculatable_finish_time = convert_time_input(finish_time)
-    return convert_distance_output(calculatable_finish_time / calculatable_pace)
+    calculable_pace = convert_pace_input(pace)
+    calculable_finish_time = convert_time_input(finish_time)
+    return convert_distance_output(calculable_finish_time / calculable_pace)
 
 
 def main() -> None:
-    """Ask the user what to calculate, read the two values and print the result."""
+    """Ask the user what to calculate, read the two values and print the result"""
     menu_choices = ["1", "2", "3", "4"]
-    menu_choice = input("What would you like to have calculated?\n1 for Distance\n2 for Pace\n3 for Finish Time\n4 to end: ")
+    input_text = (
+        "What would you like to have calculated?\n1 for Distance\n"
+        "2 for Pace\n3 for Finish Time\n4 to end the program: "
+    )
 
-    while menu_choice not in menu_choices:
-        menu_choice = input("Unexpected Answer\nPlease retry\n1 for Distance\n2 for Pace\n3 for Finish Time\n4 to end: ")
+    while True:
+        menu_choice = input(input_text)
 
-    if menu_choice == "1":
-        pace = input("Please enter your pace like shown -> e.g. 5:30: ")
-        finish_time = input("Please enter your finish time like shown -> e.g. 1:30: ")
-        print(f'{calculate_distance(pace, finish_time)} km')
+        while menu_choice not in menu_choices:
+            menu_choice = input(
+                "Unexpected Answer\nPlease retry\n1 for Distance\n"
+                "2 for Pace\n3 for Finish Time\n4 to end the program: "
+            )
 
-    elif menu_choice == "2":
-        distance = input("Please enter your distance like shown -> e.g. 42,2: ")
-        finish_time = input("Please enter your finish time like shown -> e.g. 1:30: ")
-        print(calculate_pace(distance, finish_time))
+        if menu_choice == "1":
+            pace = input("Please enter your pace (e.g. 5:30): ")
+            finish_time = input("Please enter your finish time (e.g. 1:30): ")
+            print(f"{calculate_distance(pace, finish_time)} km")
 
-    elif menu_choice == "3":
-        pace = input("Please enter your pace like shown -> e.g. 5:30: ")
-        distance = input("Please enter your distance like shown -> e.g. 42,2: ")
-        print(calculate_finish_time(pace, distance))
+        elif menu_choice == "2":
+            distance = input("Please enter your distance (e.g. 42,2): ")
+            finish_time = input("Please enter your finish time (e.g. 1:30): ")
+            print(calculate_pace(distance, finish_time))
 
-    else:
-        print("Bye Bye")
+        elif menu_choice == "3":
+            pace = input("Please enter your pace (e.g. 5:30): ")
+            distance = input("Please enter your distance (e.g. 42,2): ")
+            print(calculate_finish_time(pace, distance))
+
+        else:
+            print("Bye!")
+            break
+
+        input_text = (
+            "Do you want to calculate something else?\n1 for Distance\n"
+            "2 for Pace\n3 for Finish Time\n4 for no, end the program: "
+        )
 
 
 if __name__ == "__main__":
