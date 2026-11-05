@@ -49,3 +49,10 @@ def calculate_pace(distance: str, finish_time: str) -> str:
     calculatable_distance = convert_distance_input(distance)
     calculatable_finish_time = convert_time_input(finish_time)
     return convert_pace_output(calculatable_finish_time / calculatable_distance)
+
+
+def calculate_finish_time(pace: str, distance: str) -> str:
+    """Calculates finish time based on pace and distance input"""
+    calculatable_pace = convert_pace_input(pace)
+    calculatable_distance = convert_distance_input(distance)
+    return convert_time_output(calculatable_pace * calculatable_distance)
