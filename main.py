@@ -42,3 +42,10 @@ def convert_time_output(finish_time: float) -> str:
         return f'{hours}:0{minutes} h'
     else:
         return f'{hours}:{minutes} h'
+
+
+def calculate_pace(distance: str, finish_time: str) -> str:
+    """Calculates pace based on distance and finish time input"""
+    calculatable_distance = convert_distance_input(distance)
+    calculatable_finish_time = convert_time_input(finish_time)
+    return convert_pace_output(calculatable_finish_time / calculatable_distance)
