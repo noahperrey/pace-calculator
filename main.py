@@ -16,3 +16,16 @@ def convert_time_input(finish_time: str) -> float:
     """Converts finish time string into a float of minutes"""
     hours, minutes = finish_time.split(":")
     return float(hours) * 60 + float(minutes)
+
+
+def convert_pace_output(pace: float) -> str:
+    """Converts pace as float into a string"""
+    minutes = int(pace)
+    seconds = int(round((pace - minutes)*60))
+    while seconds >= 60:
+        minutes += 1
+        seconds -= 60
+    if (seconds) < 10:
+        return f'{minutes}:0{int(seconds)}'
+    else:
+        return f'{minutes}:{int(seconds)}'
